@@ -25,4 +25,6 @@ public class Language {
     @Column(name = "LANG_ID")
     private Long langId;
 
+    @Column(name = "name")
+    private String name;
 }

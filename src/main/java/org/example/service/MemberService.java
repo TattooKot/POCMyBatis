@@ -1,8 +1,8 @@
 package org.example.service;
 
 import org.example.mapper.MemberMapper;
-import org.example.model.Member;
 import lombok.RequiredArgsConstructor;
+import org.example.model.dto.MemberDto;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -12,20 +12,20 @@ import java.util.List;
 public class MemberService {
     private final MemberMapper memberMapper;
 
-    public List<Member> getAllMembers() {
+    public List<MemberDto> getAllMembers() {
         return memberMapper.getAllMembers();
     }
 
-    public Member getMemberById(int id) {
+    public MemberDto getMemberById(int id) {
         return memberMapper.getMemberById(id);
     }
 
-    public void insertMember(Member member) {
-        memberMapper.insertMember(member);
+    public void insertMember(MemberDto memberDto) {
+        memberMapper.insertMember(memberDto);
     }
 
-    public void updateMember(Member member) {
-        memberMapper.updateMember(member);
+    public void updateMember(MemberDto memberDto) {
+        memberMapper.updateMember(memberDto);
     }
 
     public void deleteMember(int id) {

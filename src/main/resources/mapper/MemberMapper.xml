@@ -22,29 +22,42 @@
             <id property="id" column="genderId" />
             <result property="name" column="genderName" />
         </association>
+        <association property="client" column="clientCode" javaType="org.example.model.Client">
+            <id property="clientCode" column="clientCode" />
+            <result property="name" column="clientName" />
+        </association>
+        <association property="language" column="langId" javaType="org.example.model.Language">
+            <id property="langId" column="langId" />
+            <result property="name" column="langName" />
+        </association>
     </resultMap>
 
     <!-- Select all members -->
-    <select id="getAllMembers" resultMap="memberResultMap">
-
+    <select id="getAllMembers" resultType="org.example.model.dto.MemberDto">
         SELECT
-            m.member_pid AS memberPId,
-            m.member_id AS memberId,
-            m.member_id_upper AS memberIdUpper,
-            m.first_name AS firstName,
-            m.first_name_upper AS firstNameUpper,
-            m.last_name_upper AS lastNameUpper,
-            m.middle_name AS middleName,
-            m.last_name AS lastName,
-            m.suffix,
-            m.timezone_code AS timeZoneCode,
-            m.card_id AS cardId,
-            g.gender_id AS genderId,
-            g.name AS genderName
+            m.MEMBER_PID AS memberPId,
+            m.MEMBER_ID AS memberId,
+            m.MEMBER_ID_UPPER AS memberIdUpper,
+            m.FIRST_NAME AS firstName,
+            m.FIRST_NAME_UPPER AS firstNameUpper,
+            m.LAST_NAME_UPPER AS lastNameUpper,
+            m.MIDDLE_NAME AS middleName,
+            m.LAST_NAME AS lastName,
+            m.SUFFIX AS suffix,
+            m.TIMEZONE_CODE AS timeZoneCode,
+            m.CARD_ID AS cardId,
+            g.GENDER_ID AS genderId,
+            g.NAME AS genderName,
+            c.CLIENT_CODE AS clientCode,
+            c.NAME AS clientName,
+            l.LANG_ID AS langId,
+            l.NAME AS langName
         FROM
-            member m
-        LEFT JOIN
-            gender g ON m.gender_id = g.gender_id
+            MEMBER m
+            LEFT JOIN GENDER g ON m.GENDER_ID = g.GENDER_ID
+            LEFT JOIN CLIENT c ON m.CLIENT_CODE = c.CLIENT_CODE
+            LEFT JOIN LANGUAGE l ON m.prim_lang_code = l.LANG_ID;
+
     </select>
 
     <!-- Select a member by ID -->

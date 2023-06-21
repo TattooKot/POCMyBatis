@@ -1,5 +1,5 @@
 package org.example.controller;
-import org.example.model.Member;
+import org.example.model.dto.MemberDto;
 import org.example.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -19,24 +19,24 @@ public class MemberController {
     private final MemberService memberService;
 
     @GetMapping
-    public List<Member> getAllMembers() {
+    public List<MemberDto> getAllMembers() {
         return memberService.getAllMembers();
     }
 
     @GetMapping("/{id}")
-    public Member getMemberById(@PathVariable int id) {
+    public MemberDto getMemberById(@PathVariable int id) {
         return memberService.getMemberById(id);
     }
 
     @PostMapping
-    public void createMember(@RequestBody Member member) {
-        memberService.insertMember(member);
+    public void createMember(@RequestBody MemberDto memberDto) {
+        memberService.insertMember(memberDto);
     }
 
     @PutMapping("/{id}")
-    public void updateMember(@PathVariable int id, @RequestBody Member member) {
-        member.setMemberPId((long) id);
-        memberService.updateMember(member);
+    public void updateMember(@PathVariable int id, @RequestBody MemberDto memberDto) {
+        memberDto.setMemberPId((long) id);
+        memberService.updateMember(memberDto);
     }
 
     @DeleteMapping("/{id}")

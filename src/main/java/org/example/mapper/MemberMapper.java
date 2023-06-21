@@ -1,20 +1,20 @@
 package org.example.mapper;
 
 import org.apache.ibatis.annotations.Mapper;
-import org.example.model.Member;
+import org.example.model.dto.MemberDto;
 
 import java.util.List;
 
 @Mapper
 public interface MemberMapper {
 
-    List<Member> getAllMembers();
+    List<MemberDto> getAllMembers();
 
-    Member getMemberById(int id);
+    MemberDto getMemberById(int id);
 
-    void insertMember(Member member);
+    void insertMember(MemberDto memberDto);
 
-    void updateMember(Member member);
+    void updateMember(MemberDto memberDto);
 
     void deleteMember(int id);
 }

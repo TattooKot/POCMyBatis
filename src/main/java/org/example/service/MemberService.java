@@ -23,9 +23,9 @@ public class MemberService {
     }
     /**
 
-     Retrieves a list of members for viewing purposes based on the specified role.
-     @param role the role of the members to retrieve for viewing
-     @return a list of MemberDto objects representing the members for viewing
+     Retrieves a list of members by calling sql view based on the specified role.
+     @param role the role of the members to retrieve
+     @return a list of MemberDto objects representing the members
      */
     public List<MemberDto> getAllMembersView(String role) {
         return memberMapper.getAllMembersView(role);

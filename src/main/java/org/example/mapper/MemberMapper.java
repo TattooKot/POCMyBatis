@@ -8,7 +8,7 @@ import java.util.List;
 @Mapper
 public interface MemberMapper {
 
-    List<MemberDto> getAllMembers();
+    List<MemberDto> getAllMembers(String role);
 
     MemberDto getMemberById(int id);
 

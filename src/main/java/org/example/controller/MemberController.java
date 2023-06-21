@@ -18,14 +18,9 @@ import java.util.List;
 public class MemberController {
     private final MemberService memberService;
 
-    @GetMapping
-    public List<MemberDto> getAllMembers() {
-        return memberService.getAllMembers();
-    }
-
-    @GetMapping("/{id}")
-    public MemberDto getMemberById(@PathVariable int id) {
-        return memberService.getMemberById(id);
+    @GetMapping("/{role}")
+    public List<MemberDto> getAllMembers(@PathVariable String role) {
+        return memberService.getAllMembers(role);
     }
 
     @PostMapping

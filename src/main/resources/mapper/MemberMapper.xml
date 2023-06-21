@@ -54,18 +54,37 @@
             l.NAME AS langName
     </sql>
 
+    <sql id="selectForUser">
+        SELECT
+        m.MEMBER_PID AS memberPId,
+        m.MEMBER_ID AS memberId,
+        m.MEMBER_ID_UPPER AS memberIdUpper,
+        m.FIRST_NAME AS firstName,
+        g.GENDER_ID AS genderId,
+        g.NAME AS genderName,
+        c.CLIENT_CODE AS clientCode,
+        c.NAME AS clientName
+    </sql>
+
     <sql id="fromMemberM">FROM MEMBER m</sql>
 
-    <sql id="allTablesJoin">
+    <sql id="adminTablesJoin">
         LEFT JOIN GENDER g ON m.GENDER_ID = g.GENDER_ID
         LEFT JOIN CLIENT c ON m.CLIENT_CODE = c.CLIENT_CODE
         LEFT JOIN LANGUAGE l ON m.prim_lang_code = l.LANG_ID;
     </sql>
 
-    <select id="getAllMembers" resultType="org.example.model.dto.MemberDto">
-        <include refid="selectForAdmin"/>
-        <include refid="fromMemberM"/>
-        <include refid="allTablesJoin"/>
+    <sql id="userTablesJoin">
+        LEFT JOIN GENDER g ON m.GENDER_ID = g.GENDER_ID
+        LEFT JOIN CLIENT c ON m.CLIENT_CODE = c.CLIENT_CODE;
+    </sql>
+
+    <select id="getAllMembers" parameterType="string" resultType="org.example.model.dto.MemberDto">
+        <if test='role == "admin"'><include refid="selectForAdmin"/></if>
+        <if test='role == "user"'><include refid="selectForUser"/></if>
+        <if test="role != null"><include refid="fromMemberM"/></if>
+        <if test='role == "admin"'><include refid="adminTablesJoin"/></if>
+        <if test='role == "user"'><include refid="userTablesJoin"/></if>
     </select>
 
 

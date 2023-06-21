@@ -12,8 +12,8 @@ import java.util.List;
 public class MemberService {
     private final MemberMapper memberMapper;
 
-    public List<MemberDto> getAllMembers() {
-        return memberMapper.getAllMembers();
+    public List<MemberDto> getAllMembers(String role) {
+        return memberMapper.getAllMembers(role);
     }
 
     public MemberDto getMemberById(int id) {

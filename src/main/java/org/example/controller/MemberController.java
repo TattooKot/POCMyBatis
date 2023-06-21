@@ -30,8 +30,8 @@ public class MemberController {
     }
     /**
 
-     Retrieves a list of members for viewing purposes based on the specified role.
-     @param role the role of the members to retrieve for viewing
+     Retrieves a list of members by calling sql view based on the specified role.
+     @param role the role of the members to retrieve
      @return a list of MemberDto objects representing the members for viewing
      */
     @GetMapping("/view/{role}")

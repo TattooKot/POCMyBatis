@@ -5,7 +5,7 @@
 <mapper namespace="org.example.mapper.MemberMapper">
 
 
-
+<!--    for models with relations inside -->
     <resultMap id="memberResultMap" type="org.example.model.Member">
         <id property="memberPId" column="memberPId" />
         <result property="memberId" column="memberId" />

@@ -33,7 +33,7 @@
     </resultMap>
 
     <!-- Select all members -->
-    <select id="getAllMembers" resultType="org.example.model.dto.MemberDto">
+    <sql id="selectForAdmin">
         SELECT
             m.MEMBER_PID AS memberPId,
             m.MEMBER_ID AS memberId,
@@ -52,13 +52,22 @@
             c.NAME AS clientName,
             l.LANG_ID AS langId,
             l.NAME AS langName
-        FROM
-            MEMBER m
-            LEFT JOIN GENDER g ON m.GENDER_ID = g.GENDER_ID
-            LEFT JOIN CLIENT c ON m.CLIENT_CODE = c.CLIENT_CODE
-            LEFT JOIN LANGUAGE l ON m.prim_lang_code = l.LANG_ID;
+    </sql>
 
+    <sql id="fromMemberM">FROM MEMBER m</sql>
+
+    <sql id="allTablesJoin">
+        LEFT JOIN GENDER g ON m.GENDER_ID = g.GENDER_ID
+        LEFT JOIN CLIENT c ON m.CLIENT_CODE = c.CLIENT_CODE
+        LEFT JOIN LANGUAGE l ON m.prim_lang_code = l.LANG_ID;
+    </sql>
+
+    <select id="getAllMembers" resultType="org.example.model.dto.MemberDto">
+        <include refid="selectForAdmin"/>
+        <include refid="fromMemberM"/>
+        <include refid="allTablesJoin"/>
     </select>
+
 
     <!-- Select a member by ID -->
     <select id="getMemberById" parameterType="int" resultType="org.example.model.Member">

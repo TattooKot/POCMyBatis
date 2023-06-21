@@ -25,4 +25,6 @@ public class Client {
     @Column(name = "CLIENT_CODE")
     private Long clientCode;
 
+    @Column(name = "NAME")
+    private String name;
 }

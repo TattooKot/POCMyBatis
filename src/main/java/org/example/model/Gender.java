@@ -1,10 +1,8 @@
 package org.example.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
-import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -14,15 +12,15 @@ import javax.persistence.Column;
 
 @Entity
 @Table
-@AllArgsConstructor
-@NoArgsConstructor
-@Builder
+@RequiredArgsConstructor
 @Getter
 @Setter
 public class Gender {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "GENDER_ID")
-    private Long genderId;
+    private Integer id;
 
+    @Column(name = "NAME")
+    private String name;
 }

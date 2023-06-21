@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.example.mapper.MemberMapper">
+
+
+
+    <resultMap id="memberResultMap" type="org.example.model.Member">
+        <id property="memberPId" column="memberPId" />
+        <result property="memberId" column="memberId" />
+        <result property="memberIdUpper" column="memberIdUpper" />
+        <result property="firstName" column="firstName" />
+        <result property="firstNameUpper" column="firstNameUpper" />
+        <result property="lastNameUpper" column="lastNameUpper" />
+        <result property="middleName" column="middleName" />
+        <result property="lastName" column="lastName" />
+        <result property="suffix" column="suffix" />
+        <result property="timeZoneCode" column="timeZoneCode" />
+        <result property="cardId" column="cardId" />
+        <association property="gender" column="genderId" javaType="org.example.model.Gender">
+            <id property="id" column="genderId" />
+            <result property="name" column="genderName" />
+        </association>
+    </resultMap>
+
+    <!-- Select all members -->
+    <select id="getAllMembers" resultMap="memberResultMap">
+
+        SELECT
+            m.member_pid AS memberPId,
+            m.member_id AS memberId,
+            m.member_id_upper AS memberIdUpper,
+            m.first_name AS firstName,
+            m.first_name_upper AS firstNameUpper,
+            m.last_name_upper AS lastNameUpper,
+            m.middle_name AS middleName,
+            m.last_name AS lastName,
+            m.suffix,
+            m.timezone_code AS timeZoneCode,
+            m.card_id AS cardId,
+            g.gender_id AS genderId,
+            g.name AS genderName
+        FROM
+            member m
+        LEFT JOIN
+            gender g ON m.gender_id = g.gender_id
+    </select>
+
+    <!-- Select a member by ID -->
+    <select id="getMemberById" parameterType="int" resultType="org.example.model.Member">
+        SELECT * FROM member WHERE id = #{id}
+    </select>
+
+    <!-- Insert a new member -->
+    <insert id="insertMember" parameterType="org.example.model.Member">
+        INSERT INTO member (name, email) VALUES (#{name}, #{email})
+    </insert>
+
+    <!-- Update an existing member -->
+    <update id="updateMember" parameterType="org.example.model.Member">
+        UPDATE member SET name = #{name}, email = #{email} WHERE id = #{id}
+    </update>
+
+    <!-- Delete a member -->
+    <delete id="deleteMember" parameterType="int">
+        DELETE FROM member WHERE id = #{id}
+    </delete>
+</mapper>

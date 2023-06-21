@@ -17,7 +17,7 @@ import lombok.Setter;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table
+@Table(name = "member")
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
@@ -60,7 +60,7 @@ public class Member {
     private String cardId;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "GENDER")
+    @JoinColumn(name = "GENDER", referencedColumnName = "GENDER_ID")
     private Gender gender;
 
     @ManyToOne(fetch = FetchType.LAZY)

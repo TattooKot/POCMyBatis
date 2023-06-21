@@ -87,6 +87,18 @@
         <if test='role == "user"'><include refid="userTablesJoin"/></if>
     </select>
 
+    <sql id="adminView">
+        SELECT * FROM member_details_view;
+    </sql>
+    <sql id="userView">
+        SELECT * FROM member_details_user_view;
+    </sql>
+
+    <select id="getAllMembersView" parameterType="string" resultType="org.example.model.dto.MemberDto">
+        <if test='role == "admin"'><include refid="adminView"/></if>
+        <if test='role == "user"'><include refid="userView"/></if>
+    </select>
+
 
     <!-- Select a member by ID -->
     <select id="getMemberById" parameterType="int" resultType="org.example.model.Member">

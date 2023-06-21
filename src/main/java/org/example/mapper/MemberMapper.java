@@ -10,6 +10,8 @@ public interface MemberMapper {
 
     List<MemberDto> getAllMembers(String role);
 
+    List<MemberDto> getAllMembersView(String role);
+
     MemberDto getMemberById(int id);
 
     void insertMember(MemberDto memberDto);

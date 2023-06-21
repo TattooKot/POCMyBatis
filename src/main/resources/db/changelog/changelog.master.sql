@@ -132,3 +132,43 @@ VALUES (1);
 -- Insert Phone
 INSERT INTO Phone (MEMBER_PID)
 VALUES (1);
+
+--changeset tattoo_kot:1.0.5
+CREATE OR REPLACE VIEW member_details_view AS
+SELECT
+    m.MEMBER_PID AS memberPId,
+    m.MEMBER_ID AS memberId,
+    m.MEMBER_ID_UPPER AS memberIdUpper,
+    m.FIRST_NAME AS firstName,
+    m.FIRST_NAME_UPPER AS firstNameUpper,
+    m.LAST_NAME_UPPER AS lastNameUpper,
+    m.MIDDLE_NAME AS middleName,
+    m.LAST_NAME AS lastName,
+    m.SUFFIX AS suffix,
+    m.TIMEZONE_CODE AS timeZoneCode,
+    m.CARD_ID AS cardId,
+    g.GENDER_ID AS genderId,
+    g.NAME AS genderName,
+    c.CLIENT_CODE AS clientCode,
+    c.NAME AS clientName,
+    l.LANG_ID AS langId,
+    l.NAME AS langName
+FROM MEMBER m
+LEFT JOIN GENDER g ON m.GENDER_ID = g.GENDER_ID
+LEFT JOIN CLIENT c ON m.CLIENT_CODE = c.CLIENT_CODE
+LEFT JOIN LANGUAGE l ON m.prim_lang_code = l.LANG_ID;
+
+--changeset tattoo_kot:1.0.6
+CREATE OR REPLACE VIEW member_details_user_view AS
+SELECT
+    m.MEMBER_PID AS memberPId,
+    m.MEMBER_ID AS memberId,
+    m.MEMBER_ID_UPPER AS memberIdUpper,
+    m.FIRST_NAME AS firstName,
+    g.GENDER_ID AS genderId,
+    g.NAME AS genderName,
+    c.CLIENT_CODE AS clientCode,
+    c.NAME AS clientName
+FROM MEMBER m
+LEFT JOIN GENDER g ON m.GENDER_ID = g.GENDER_ID
+LEFT JOIN CLIENT c ON m.CLIENT_CODE = c.CLIENT_CODE;

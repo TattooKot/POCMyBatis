@@ -23,6 +23,11 @@ public class MemberController {
         return memberService.getAllMembers(role);
     }
 
+    @GetMapping("/view/{role}")
+    public List<MemberDto> getAllMembersView(@PathVariable String role) {
+        return memberService.getAllMembersView(role);
+    }
+
     @PostMapping
     public void createMember(@RequestBody MemberDto memberDto) {
         memberService.insertMember(memberDto);

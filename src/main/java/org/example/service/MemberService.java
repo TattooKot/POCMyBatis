@@ -16,6 +16,10 @@ public class MemberService {
         return memberMapper.getAllMembers(role);
     }
 
+    public List<MemberDto> getAllMembersView(String role) {
+        return memberMapper.getAllMembersView(role);
+    }
+
     public MemberDto getMemberById(int id) {
         return memberMapper.getMemberById(id);
     }

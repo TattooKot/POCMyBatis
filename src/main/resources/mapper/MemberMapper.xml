@@ -87,6 +87,9 @@
         <if test='role == "user"'><include refid="userTablesJoin"/></if>
     </select>
 
+<!--                             -->
+
+<!--    Sql view approach        -->
     <sql id="adminView">
         SELECT * FROM member_details_view;
     </sql>
@@ -98,7 +101,7 @@
         <if test='role == "admin"'><include refid="adminView"/></if>
         <if test='role == "user"'><include refid="userView"/></if>
     </select>
-
+<!--                              -->
 
     <!-- Select a member by ID -->
     <select id="getMemberById" parameterType="int" resultType="org.example.model.Member">
